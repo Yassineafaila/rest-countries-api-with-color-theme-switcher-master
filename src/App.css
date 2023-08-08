@@ -1,38 +1,86 @@
-.App {
-  text-align: center;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Nunito Sans', sans-serif;
+}
+:root{
+
+  --Dark-Blue: hsl(209, 23%, 22%); /*Dark Mode Elements*/
+  --Very-Dark-Blue: hsl(207, 26%, 17%); /*Dark Mode Background*/
+  --Very-Dark-Blue: hsl(200, 15%, 8%); /*Light Mode Text*/
+  --Dark-Gray: hsl(0, 0%, 52%); /*Light Mode Input*/
+  --Very-LightGray: hsl(0, 0%, 98%); /*Light Mode Background*/
+  --White: hsl(0, 0%, 100%); /*Dark Mode Text & Light Mode Elements*/
+
+  --Homepage-Items: 14px;
+  --Detail-Page: 16px ;
+}
+svg,img,picture{
+  display: block;
+  max-width: 100%;
+}
+.App{
+  background-color: var(--Very-LightGray);
+}
+.header{
+  background-color: var(--White);
+}
+.header .title{
+  color: var(--Very-Dark-Blue);
+}
+.header div .icon{
+  color: var(--Very-Dark-Blue);
+  
+}
+.header div .icon-title{
+  color: var(--Very-Dark-Blue);
+}
+form{
+  max-width: 30rem;
+  background-color: var(--White);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+form div .icon{
+  color: var(--Dark-Gray);
+}
+form div input::placeholder{
+  font-size: var(--Homepage-Items);
+  outline: none;
+  font-weight: 600;
+}
+form div input:focus{
+  outline: none;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.select-menu .select-btn,
+.select-menu .options{
+  background-color: var(--White);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.select-menu .select-btn,
+.select-menu .options li{
+  color: var(--Dark-Blue);
+}
+.select-menu .select-btn .icon{
+  color: var(--Dark-Blue);
+}
+.country{
+  background-color: var(--White);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.country .country-name{
+  color: var(--Dark-Blue);
+}
+.country ul li{
+  color: var(--Dark-Blue);
+}
+.country ul li span{
+  color: var(--Dark-Gray);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* @media screen and (min-width:1300px){
+  .container{
+    max-width: 80rem;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+} */
