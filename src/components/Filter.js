@@ -47,10 +47,17 @@ function Filter({ showCountries }) {
             </option>
             <option
               className="option font-semibold mt-1 mb-2 cursor-pointer"
-              value="America"
+              value="North America"
               onClick={ChangeSelect}
             >
-              America
+              North America
+            </option>
+            <option
+              className="option font-semibold mt-1 mb-2 cursor-pointer"
+              value="South America"
+              onClick={ChangeSelect}
+            >
+              South America
             </option>
             <option
               className="option font-semibold mt-1 mb-2 cursor-pointer"

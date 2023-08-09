@@ -52,7 +52,9 @@ form div input::placeholder{
 form div input:focus{
   outline: none;
 }
-
+.container{
+  min-height: calc(100vh - 96px);
+}
 .select-menu .select-btn,
 .select-menu .options{
   background-color: var(--White);
@@ -78,7 +80,39 @@ form div input:focus{
 .country ul li span{
   color: var(--Dark-Gray);
 }
+.btn-back{
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  color: var(--Dark-Blue);
+}
+.country-detail h3,
+.country-detail div ul li{
+  color: var(--Very-Dark-Blue);
+}
+.country-detail div ul li span{
+  font-weight: 600;
+}
+.country-detail div ul li{
+  font-weight: bold;
+}
+.detail li span{
+  color: var(--Dark-Gray);
+}
+.border-countries p{
+  color: var(--Very-Dark-Blue);
+}
+@media screen and (min-width:1024px){
+  .country-container img{
+    width: 400px;
+    height: 300px;
 
+  }
+}
+@media screen and (min-width:1280px){
+  .country-container img{
+    width: 550px;
+    height: 400px;
+  }
+}
 /* @media screen and (min-width:1300px){
   .container{
     max-width: 80rem;
