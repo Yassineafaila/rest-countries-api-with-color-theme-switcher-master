@@ -1,21 +1,24 @@
 import React,{useState} from 'react'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
-function Filter({ showCountries }) {
+function Filter({ setContinents }) {
   const [select, setSelect] = useState("Filter by Region");
   const [isMenuShowing, setShowing] = useState(false);
   const [state, setState] = useState(true);
   const ShowMenu = () => {
     setShowing(!isMenuShowing);
     setState(!state);
+
   };
   const HideMenu = () => {
     setState(!state);
     setShowing(!isMenuShowing);
+    setContinents(null)
+    setSelect("Filter by Region")
   };
   const ChangeSelect = (e) => {
-      setSelect(e.target.value);
-      showCountries(e.target.value)
+    setSelect(e.target.value);
+    setContinents(e.target.value);
   };
   return (
     <div className="my-8 px-3.5 relative">

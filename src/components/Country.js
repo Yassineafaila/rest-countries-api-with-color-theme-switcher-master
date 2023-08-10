@@ -1,84 +1,42 @@
 import React from "react";
 import { NumericFormat } from "react-number-format";
 
-function Country({ c: selectedCountry }) {
+
+//using the use React.memo prevent the Country Component from re-render
+const Country = React.memo(({ country }) => {
   return (
-    <div className="country-container flex items-center justify-start  sm:justify-start md:flex-col lg:justify-between lg:flex-row flex-wrap px-4 xl:gap-11">
+    <div className="country rounded-lg pb-4 w-72 overflow-hidden mx-auto h-96">
       <img
-        src={selectedCountry.flags.png}
+        src={country.flags.png}
         alt="flag"
-        className="cursor-pointer md:w-96  "
+        className="cursor-pointer h-40 w-full"
+        // onClick={() => setCountry(country)}
       />
-      <div className=" country-detail px-8 py-9 flex-1 ms-10 xl:px-3 ">
-        <h3 className="font-extrabold text-lg country-name mb-3.5 lg:text-2xl ">
-          {selectedCountry.name.common}
+      <div className="px-8 py-9">
+        <h3 className="font-extrabold text-lg country-name mb-3.5">
+          {country.name.common}
         </h3>
-        <div className="flex items-start my-8  md:justify-between xl:justify-between flex-wrap   ">
-          <ul className="detail flex flex-col gap-y-1">
-            <li className="font-semibold mt-1 flex items-center gap-1">
-              Native Name :
-              <span className="xl:text-md">{selectedCountry.name.common}</span>
-            </li>
-            <li className="font-semibold flex  mt-1 gap-1 ">
-              Population :
-              <span className="xl:text-md">
-                <NumericFormat
-                  className="w-32 "
-                  value={selectedCountry.population}
-                  thousandSeparator=","
-                />
-              </span>
-            </li>
-            <li className="font-semibold mt-1 gap-1">
-              Region :{" "}
-              <span className="xl:text-md">{selectedCountry.region}</span>
-            </li>
-            <li className="font-semibold mt-1 gap-1">
-              Sub Region :
-              <span className="xl:text-md">{selectedCountry.subregion}</span>
-            </li>
-            <li className="font-semibold mt-1 gap-1">
-              Capital :{" "}
-              <span className="xl:text-md">{selectedCountry.capital}</span>
-            </li>
-          </ul>
-          <ul className="detail flex flex-col gap-y-1 my-3 md:my-0 md:mx-4 xl:m-0">
-            <li className="font-semibold mt-1 flex gap-1">
-              Top Level Domain :
-              <span className="xl:text-md">{selectedCountry.tld[0]}</span>
-            </li>
-            <li className="font-semibold mt-1 flex gap-1">
-              Currencies :
-              {Object.keys(selectedCountry.currencies).map((keys) => {
-                return (
-                  <span className="xl:text-md">
-                    {selectedCountry.currencies[keys].name}
-                  </span>
-                );
-              })}
-            </li>
-            <li className="font-semibold mt-1 flex gap-1">
-              Languages :
-              <span>
-                {Object.values(selectedCountry.languages).map((lang) => {
-                  return <span className="xl:text-md me-1">{lang},</span>;
-                })}
-              </span>
-            </li>
-          </ul>
-        </div>
-        <div className="border-countries">
-          {
-            selectedCountry.hasOwnProperty("borders")?(<p className="font-bold flex flex-wrap">
-            Border Countries :{selectedCountry.borders.map((item) => {
-              return <button className="bg-white shadow-md mx-3 px-3 font-light">{item}</button>
-            })}
-          </p>):null
-          }
-        </div>
+        <ul className="flex flex-col gap-y-1">
+          <li className="font-semibold flex gap-1">
+            Population :
+            <span className="">
+              <NumericFormat
+                className="w-32"
+                value={country.population}
+                thousandSeparator=","
+              />
+            </span>
+          </li>
+          <li className="font-semibold">
+            Region : <span className="">{country.region}</span>
+          </li>
+          <li className="font-semibold">
+            Capital : <span className="">{country.capital}</span>
+          </li>
+        </ul>
       </div>
     </div>
   );
-}
+});
 
 export default Country;

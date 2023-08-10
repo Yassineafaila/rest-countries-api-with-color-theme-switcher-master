@@ -96,6 +96,19 @@ form div input:focus{
 }
 .detail li span{
   color: var(--Dark-Gray);
+  flex-wrap: wrap;
+}
+.detail li span li{
+  color: var(--Dark-Gray);
+  font-weight: 600;
+  position: relative;
+  display: inline;
+}
+.detail li span li:not(:last-child):after{
+  content: ",";
+  position: absolute;
+  margin: 0px 0.125rem 0 0;
+  
 }
 .border-countries p{
   color: var(--Very-Dark-Blue);

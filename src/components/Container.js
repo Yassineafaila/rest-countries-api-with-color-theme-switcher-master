@@ -1,79 +1,69 @@
-import React, { useEffect, useState } from "react";
-import urid from "urid";
-import Form from "./Form";
+import React, {  useState } from "react";
+import { useDebounce } from "use-debounce";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Filter from "./Filter";
-import Countries from "./Countries";
 import Country from "./Country";
+import DetailCountry from "./DetailCountry";
 import axios from "axios";
 import Button from "./Button";
-import { counter } from "@fortawesome/fontawesome-svg-core";
 
-function Container() {
-  const [data, setData] = useState([]);
-  const [selectedCountry, setCountry] = useState(null);
+function Container({ data }) {
+  const [inputValue, setInputValue] = useState("");
   const [selectedContinents, setContinents] = useState(null);
-   
-  //this line it generate an id
-  const id = urid(4, "num");
 
-  //using useEffect to make some side effect ;
-  useEffect(() => {
-    //fetching the data from the api :
-    const fetchData = async () => {
-      const response = await fetch("https://restcountries.com/v3.1/all");
-      const newData = await response.json();
-      setData(newData);
-    };
-    fetchData();
-  }, []);
-  
-data.map((country) => {
-  console.log(country);
-});
-  //when the user choose a continents this function will fire :D
-  const ShowCountries = (select) => {
-    setContinents(data.filter((country) => {
-      return country.continents[0]===select.toString()
-    }));
-    
+  //this use for increase the app performance
+  const debouncedValue = useDebounce(inputValue, 5000);
+  const HandlerInput = (e) => {
+    setInputValue(e.target.value);
   };
+
+  //filter the data base on the input value :
+  const filteredData = data.filter((country) => {
+      const matchesInputValue =
+        inputValue.toLowerCase() === "" ||
+        country.name.common.toLowerCase().includes(inputValue.toLowerCase());
+
+      const matchesSelectedContinents =
+        selectedContinents === null ||
+        country.continents.includes(selectedContinents);
+
+      return matchesInputValue && matchesSelectedContinents;
+  });
+  // inputValue.toLowerCase()===""?country:country.name.common.toLowerCase().includes(inputValue.toLowerCase())
+  //selectedContinents===""?country:country.continents.includes(selectedContinents)
+  //render the Country components;
+  const countryComponents = filteredData.map((country, index) => {
+    return <Country country={country} key={country.name.common} />;
+  });
   return (
     <div className="container sm:mx-auto mx-auto h-full">
       <div className="lg:flex items-center justify-between">
-        <Form />
-        <Filter showCountries={ShowCountries} />
+        {/* ---start-form */}
+        <div className="my-8 px-3.5 h-auto lg:flex-1">
+          <form className=" rounded-md h-auto flex items-center shadow-md ">
+            <div className="flex items-center justify-between w-full px-8 py-5">
+              <FontAwesomeIcon
+                icon={faMagnifyingGlass}
+                className="icon text-lg me-4 cursor-pointer"
+              />
+              <input
+                type="text"
+                value={inputValue}
+                onChange={HandlerInput}
+                placeholder="Search for a country..."
+                className="flex-1 ms-2 text-base font-medium"
+              />
+            </div>
+          </form>
+        </div>
+        {/* ---end-form */}
+        <Filter setContinents={setContinents} />
       </div>
-
-      {selectedContinents ? (
-        <div className="container-countries w-auto my-7 items-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-12 md:gap-x-7 lg:gap-x-7 lg:gap-y-16">
-          {selectedContinents.map((country, index) => {
-            return (
-              <Countries
-                country={country}
-                key={urid("3","num")}
-                setCountry={setCountry}
-              />
-            );
-          })}
-        </div>
-      ) : selectedCountry ? (
-        <div className="container-country h-full">
-          <Button c={selectedCountry} setCountry={setCountry} />
-          <Country c={selectedCountry} key={id} />
-        </div>
-      ) : (
-        <div className="container-countries w-auto my-7 items-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-12 md:gap-x-7 lg:gap-x-7 lg:gap-y-16">
-          {data.map((country, index) => {
-            return (
-              <Countries
-                country={country}
-                key={urid("6","num")}
-                setCountry={setCountry}
-              />
-            );
-          })}
-        </div>
-      )}
+      {/* --display-all-countries-- */}
+      <div className="container-countries w-auto my-7 items-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-12 md:gap-x-7 lg:gap-x-7 lg:gap-y-16">
+        {countryComponents}
+      </div>
     </div>
   );
 }
