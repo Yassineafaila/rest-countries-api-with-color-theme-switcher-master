@@ -61,7 +61,7 @@ function DetailCountry({ country: selectedCountry }) {
               Languages :
               <span>
                 {Object.values(selectedCountry.languages).map((lang) => {
-                  return <li className="lang xl:text-md me-1">{lang}</li>;
+                  return <span className="lang xl:text-md me-1">{lang}</span>;
                 })}
               </span>
             </li>
@@ -71,7 +71,7 @@ function DetailCountry({ country: selectedCountry }) {
           <p className="font-bold block  ">Border Countries :</p>
           {selectedCountry.hasOwnProperty("borders") ? (
             <div className="flex flex-wrap gap-4 mt-3">
-              {selectedCountry.borders.map((item) => {
+              {selectedCountry.borders.map((item,index) => {
                 return (
                   <button className="bg-white shadow-md py-2  px-7 lg:px-4 font-light rounded-md 2xl:w-24 ">
                     {item}

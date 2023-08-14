@@ -41,7 +41,7 @@ function Container({ data }) {
     return (
       <Country
         country={country}
-        key={country.name.common}
+        key={index}
         setVueDetails={setVueDetails}
         vueDetails={vueDetails}
       />
@@ -74,8 +74,8 @@ function Container({ data }) {
       {/* --display-all-countries-- */}
       {vueDetails.vue ? (
           <div className="flex flex-col h-full">
-            <Button vueDetails={vueDetails} setVueDetails={setVueDetails} />
-            <DetailCountry country={vueDetails.country} key={vueDetails.country.name.common} />
+            <Button vueDetails={vueDetails} setVueDetails={setVueDetails}  />
+            <DetailCountry country={vueDetails.country} key={crypto.randomUUID()} />
           </div>
         ) : (
           <div className="container-countries w-auto my-7 items-center grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-y-12 md:gap-x-7 lg:gap-x-7 lg:gap-y-16">
