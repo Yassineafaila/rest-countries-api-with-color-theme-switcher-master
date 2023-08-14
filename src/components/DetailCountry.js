@@ -1,9 +1,9 @@
 import React from "react";
 import { NumericFormat } from "react-number-format";
 
-function DetailCountry({ c: selectedCountry }) {
+function DetailCountry({ country: selectedCountry }) {
   return (
-    <div className="country-container flex items-center justify-start  sm:justify-start md:flex-col lg:justify-between lg:flex-row flex-wrap px-4 xl:gap-11">
+    <div className="country-container flex-col flex items-center justify-start  sm:justify-start md:flex-col lg:justify-between lg:flex-row flex-wrap px-4 xl:gap-11">
       <img
         src={selectedCountry.flags.png}
         alt="flag"
@@ -67,18 +67,18 @@ function DetailCountry({ c: selectedCountry }) {
             </li>
           </ul>
         </div>
-        <div className="border-countries">
+        <div className="border-countries items-center flex flex-wrap gap-2  xl:mt-12">
+          <p className="font-bold block  ">Border Countries :</p>
           {selectedCountry.hasOwnProperty("borders") ? (
-            <p className="font-bold flex flex-wrap">
-              Border Countries :
+            <div className="flex flex-wrap gap-4 mt-3">
               {selectedCountry.borders.map((item) => {
                 return (
-                  <button className="bg-white shadow-md mx-3 px-3 font-light">
+                  <button className="bg-white shadow-md py-2  px-7 lg:px-4 font-light rounded-md 2xl:w-24 ">
                     {item}
                   </button>
                 );
               })}
-            </p>
+            </div>
           ) : null}
         </div>
       </div>

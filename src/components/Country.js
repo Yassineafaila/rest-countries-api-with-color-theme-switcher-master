@@ -3,14 +3,18 @@ import { NumericFormat } from "react-number-format";
 
 
 //using the use React.memo prevent the Country Component from re-render
-const Country = React.memo(({ country }) => {
+const Country = React.memo(({ country, setVueDetails, vueDetails }) => {
   return (
     <div className="country rounded-lg pb-4 w-72 overflow-hidden mx-auto h-96">
       <img
         src={country.flags.png}
         alt="flag"
         className="cursor-pointer h-40 w-full"
-        // onClick={() => setCountry(country)}
+        onClick={() => setVueDetails({
+          ...vueDetails,
+          vue: true,
+          country:country
+        })}
       />
       <div className="px-8 py-9">
         <h3 className="font-extrabold text-lg country-name mb-3.5">
