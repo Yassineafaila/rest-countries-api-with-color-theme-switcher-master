@@ -4,13 +4,19 @@ import Header from "./components/Header";
 import Container from "./components/Container";
 function App() {
   const [data, setData] = useState([]);
+  const [isLoading,setLoading]=useState(false)
   //using useEffect to make some side effect ;
   useEffect(() => {
     //fetching the data from the api :
     const fetchData = async () => {
-      const response = await fetch("https://restcountries.com/v3.1/all");
+      try {
+        const response = await fetch("https://restcountries.com/v3.1/all");
       const newData = await response.json();
       setData(newData);
+      setLoading(true)
+      } catch (error) {
+        console.log(error)
+      }
     };
     fetchData();
   }, []);
@@ -18,7 +24,9 @@ function App() {
   return (
     <div className="App w-full h-full ">
       <Header />
-      <Container data={data} />
+      {
+        isLoading?<Container data={data} />:<h1>loading...</h1>
+      }
     </div>
   );
 }
