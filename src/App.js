@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Header from "./components/Header";
-import Filter from "./components/Filter";
 import Container from "./components/Container";
 function App() {
   const [data, setData] = useState([]);
